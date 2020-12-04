@@ -11,7 +11,7 @@ abstract class ThemeEvent extends Equatable {
 class ChangeTheme extends ThemeEvent {
   final AppTheme theme;
   final bool isLight;
-  
+
   ChangeTheme({
     this.theme,
     this.isLight,

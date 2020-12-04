@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:print_to_pdf/global/theme/app_theme.dart';
+import 'package:print_to_pdf/global/styles/app_theme.dart';
 
 part 'theme_event.dart';
 part 'theme_state.dart';

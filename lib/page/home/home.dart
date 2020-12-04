@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         tooltip: 'Tambah Data',
-        onPressed: () async {
+        onPressed: () {
           // var contact = await navigateToEntryForm(context, null);
           // if (contact != null) addContact(contact);
         },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:print_to_pdf/global/theme/app_theme.dart';
+import 'package:print_to_pdf/global/styles/app_theme.dart';
 import 'package:print_to_pdf/global/theme/bloc/theme_bloc.dart';
 import 'package:print_to_pdf/page/home/home.dart';
 
