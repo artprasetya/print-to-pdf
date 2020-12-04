@@ -14,6 +14,7 @@ final appThemeData = {
   AppTheme.Dark: ThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.grey[700],
+    accentColor: Colors.purple[300],
     fontFamily: 'FazzNeue',
   ),
 };
