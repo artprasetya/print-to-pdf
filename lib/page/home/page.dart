@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:print_to_pdf/page/home/view.dart';
-import 'package:print_to_pdf/page/home/widgets/components/form_insert_file_name.dart';
+import 'package:print_to_pdf/page/home/widgets/components/dialog_insert_file_name.dart';
 import 'package:print_to_pdf/router/router.gr.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onTapNext() {
-    ExtendedNavigator.root.push(Routes.formPage);
+    ExtendedNavigator.root
+        .push(Routes.formPage, arguments: FormPageArguments(fileName: 'Test'));
   }
 }

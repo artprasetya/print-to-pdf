@@ -3,10 +3,19 @@ import 'package:flutter/widgets.dart';
 import 'package:print_to_pdf/global/components/template_page.dart';
 
 class FormView extends StatelessWidget {
+  final String fileName;
+  final VoidCallback onTapCreate;
+
+  const FormView({
+    Key key,
+    this.fileName,
+    this.onTapCreate,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return TemplatePage(
-      title: 'File Name',
+      title: fileName,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16),
@@ -43,7 +52,7 @@ class FormView extends StatelessWidget {
       ),
       footer: RaisedButton(
         child: Text('Create PDF'),
-        onPressed: () {},
+        onPressed: onTapCreate,
       ),
     );
   }
