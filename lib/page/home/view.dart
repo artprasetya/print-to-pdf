@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
   final List<DummyData> list;
   final Function onTapItem;
   final Function onTapDelete;
-  final Function onTapCreate;
+  final VoidCallback onTapCreate;
 
   const HomeView({
     Key key,
@@ -38,14 +38,6 @@ class HomeView extends StatelessWidget {
     return TemplatePage(
       title: 'Print to PDF',
       centerTitle: true,
-      // actions: <Widget>[
-      //   IconButton(
-      //     icon: Icon(Icons.settings),
-      //     onPressed: () {
-      //       Navigator.of(context).push(RouteTransition(page: PreferencePage()));
-      //     },
-      //   )
-      // ],
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(12),

@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:print_to_pdf/page/home/view.dart';
+import 'package:print_to_pdf/page/home/widgets/components/form_insert_file_name.dart';
 
 class HomPage extends StatefulWidget {
   @override
@@ -14,13 +16,24 @@ class _HomPageState extends State<HomPage> {
       content: 'Content',
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return HomeView(
       list: list,
       onTapItem: () {},
       onTapDelete: () {},
-      onTapCreate: () {},
+      onTapCreate: () => _showDialog(context),
+    );
+  }
+
+  Future<void> _showDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: buildFormInsertFileNameDialog(
+        context,
+        () {},
+      ),
     );
   }
 }
