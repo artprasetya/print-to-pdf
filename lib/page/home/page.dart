@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:print_to_pdf/page/home/view.dart';
 import 'package:print_to_pdf/page/home/widgets/components/form_insert_file_name.dart';
+import 'package:print_to_pdf/router/router.gr.dart';
 
-class HomPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _HomPageState createState() => _HomPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomPageState extends State<HomPage> {
+class _HomePageState extends State<HomePage> {
   List<DummyData> list = [
     DummyData(
       id: 'ID',
@@ -32,8 +34,12 @@ class _HomPageState extends State<HomPage> {
       context: context,
       builder: buildFormInsertFileNameDialog(
         context,
-        () {},
+        _onTapNext,
       ),
     );
+  }
+
+  void _onTapNext() {
+    ExtendedNavigator.root.push(Routes.formPage);
   }
 }
