@@ -12,13 +12,16 @@ import 'package:flutter/widgets.dart';
 
 import '../page/form/page.dart';
 import '../page/home/page.dart';
+import '../page/onboarding/page.dart';
 import '../page/viewer/page.dart';
 
 class Routes {
-  static const String homePage = '/';
+  static const String onboardingPage = '/';
+  static const String homePage = '/home-page';
   static const String formPage = '/form-page';
   static const String pdfViewerPage = '/pdf-viewer-page';
   static const all = <String>{
+    onboardingPage,
     homePage,
     formPage,
     pdfViewerPage,
@@ -29,6 +32,7 @@ class AppRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.onboardingPage, page: OnboardingPage),
     RouteDef(Routes.homePage, page: HomePage),
     RouteDef(Routes.formPage, page: FormPage),
     RouteDef(Routes.pdfViewerPage, page: PdfViewerPage),
@@ -36,10 +40,18 @@ class AppRouter extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    HomePage: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => HomePage(),
+    OnboardingPage: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            OnboardingPage(),
         settings: data,
+      );
+    },
+    HomePage: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
       );
     },
     FormPage: (data) {

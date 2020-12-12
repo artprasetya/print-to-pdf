@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:print_to_pdf/global/components/template_page.dart';
-import 'package:print_to_pdf/global/database/helpers/helper.dart';
-import 'package:print_to_pdf/global/database/models/data.dart';
 
 class DummyData {
   final String id;
@@ -16,6 +14,7 @@ class DummyData {
 }
 
 class HomeView extends StatelessWidget {
+  final bool isLoading;
   final List<DummyData> list;
   final Function onTapItem;
   final Function onTapDelete;
@@ -23,6 +22,7 @@ class HomeView extends StatelessWidget {
 
   const HomeView({
     Key key,
+    this.isLoading = false,
     this.list,
     this.onTapItem,
     this.onTapDelete,
@@ -31,13 +31,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DBHelper _dbHelper = DBHelper();
-    int _count = 0;
-    List<PDFData> _pdfList;
-
     return TemplatePage(
       title: 'Print to PDF',
       centerTitle: true,
+      loading: isLoading,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(12),
@@ -54,12 +51,13 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        tooltip: 'Create New',
-        onPressed: onTapCreate,
-      ),
+      floatingActionButton: !isLoading
+          ? FloatingActionButton(
+              child: Icon(Icons.add),
+              tooltip: 'Create New',
+              onPressed: onTapCreate,
+            )
+          : null,
     );
   }
 }

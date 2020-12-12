@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:print_to_pdf/global/components/loading_page.dart';
 
 class TemplatePage extends StatelessWidget {
+  final bool loading;
   final String title;
   final bool centerTitle;
   final Widget body;
@@ -11,6 +13,7 @@ class TemplatePage extends StatelessWidget {
 
   const TemplatePage({
     Key key,
+    this.loading = false,
     @required this.title,
     this.centerTitle = false,
     @required this.body,
@@ -29,12 +32,17 @@ class TemplatePage extends StatelessWidget {
         centerTitle: centerTitle,
         actions: actions,
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: body,
+          Column(
+            children: [
+              Expanded(
+                child: body,
+              ),
+              if (footer != null) _buildFooter(footer),
+            ],
           ),
-          if (footer != null) _buildFooter(footer),
+          if (loading) LoadingPage(),
         ],
       ),
       floatingActionButton: floatingActionButton,

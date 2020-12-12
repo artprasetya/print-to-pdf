@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: appThemeData[AppTheme.Dark],
       builder: ExtendedNavigator.builder<AppRouter>(
         router: AppRouter(),
-        initialRoute: Routes.homePage,
+        initialRoute: Routes.onboardingPage,
       ),
     );
   }
