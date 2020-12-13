@@ -24,10 +24,7 @@ class OnboardingPage extends HookWidget {
                 Container(
                   height: 44,
                   width: 44,
-                  child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Colors.purple[300]),
-                  ),
+                  child: CircularProgressIndicator(),
                 ),
                 SizedBox(height: 16),
                 Text('Print To PDF'),

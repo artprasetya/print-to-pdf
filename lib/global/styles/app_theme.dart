@@ -9,10 +9,12 @@ final appThemeData = {
   AppTheme.Light: ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.blue,
+    accentColor: Colors.blue,
     fontFamily: 'FazzNeue',
     buttonTheme: ButtonThemeData(
+      textTheme: ButtonTextTheme.primary,
       buttonColor: Colors.blue,
-      disabledColor: Colors.grey[700],
+      disabledColor: Colors.grey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),
@@ -30,5 +32,7 @@ final appThemeData = {
         borderRadius: BorderRadius.circular(4),
       ),
     ),
+    cursorColor: Colors.purple[300],
+    toggleableActiveColor: Colors.purple[300],
   ),
 };
