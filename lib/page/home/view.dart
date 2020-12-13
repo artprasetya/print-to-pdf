@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:print_to_pdf/global/components/template_page.dart';
 import 'package:print_to_pdf/global/model/pdf_data.dart';
+import 'package:print_to_pdf/global/widgets/template_page.dart';
 import 'package:print_to_pdf/page/home/widgets/components/item/pdf_item.dart';
 
 class HomeView extends StatelessWidget {

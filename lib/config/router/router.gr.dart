@@ -9,11 +9,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../page/form/page.dart';
-import '../page/home/page.dart';
-import '../page/onboarding/page.dart';
-import '../page/preference/page.dart';
-import '../page/viewer/page.dart';
+import '../../page/form/page.dart';
+import '../../page/home/page.dart';
+import '../../page/onboarding/page.dart';
+import '../../page/preference/page.dart';
+import '../../page/viewer/page.dart';
 
 class Routes {
   static const String onboardingPage = '/';

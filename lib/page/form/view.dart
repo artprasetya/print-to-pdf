@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:print_to_pdf/global/components/template_page.dart';
+import 'package:print_to_pdf/global/widgets/template_page.dart';
 
 class FormView extends StatelessWidget {
   final String fileName;

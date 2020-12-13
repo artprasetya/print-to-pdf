@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:print_to_pdf/global/components/loading_page.dart';
+import 'package:print_to_pdf/global/widgets/loading_page.dart';
 
 class TemplatePage extends StatelessWidget {
   final bool loading;

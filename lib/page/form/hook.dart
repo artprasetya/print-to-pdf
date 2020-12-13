@@ -7,9 +7,9 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as PDFWidget;
+import 'package:print_to_pdf/config/router/router.gr.dart';
 import 'package:print_to_pdf/global/model/pdf_data.dart';
 import 'package:print_to_pdf/main.dart';
-import 'package:print_to_pdf/router/router.gr.dart';
 
 class FormState {
   final TextEditingController titleController;
