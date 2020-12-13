@@ -5,11 +5,13 @@ import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 class PdfViewerView extends StatelessWidget {
   final String fileName;
   final String path;
+  final VoidCallback onTapShare;
 
   const PdfViewerView({
     Key key,
     this.fileName,
     this.path,
+    this.onTapShare,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class PdfViewerView extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.share),
-              onPressed: () {},
+              onPressed: onTapShare,
             ),
           ],
         ),
