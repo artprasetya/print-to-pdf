@@ -1,52 +1,44 @@
-import 'dart:developer';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:print_to_pdf/page/home/view.dart';
+import 'package:hive/hive.dart';
+import 'package:print_to_pdf/global/model/pdf_data.dart';
+import 'package:print_to_pdf/main.dart';
 import 'package:print_to_pdf/page/home/widgets/components/dialog/dialog.dart';
+import 'package:print_to_pdf/router/router.gr.dart';
 
 class HomeState {
   final bool isLoading;
-  final List<DummyData> list;
-  final VoidCallback onTapItem;
-  final VoidCallback onTapDelete;
+  final Function(PDFData) onTapItem;
+  final Function(int) onTapDelete;
   final VoidCallback onTapCreate;
+  final Box<PDFData> pdfBox;
 
   HomeState({
     this.isLoading,
-    this.list,
     this.onTapItem,
     this.onTapDelete,
     this.onTapCreate,
+    this.pdfBox,
   });
 }
 
 HomeState useHomeHook(BuildContext context) {
-  // State
   final _isLoading = useState<bool>(false);
-  final _list = useState<List<DummyData>>([]);
+  final _pdfBox = useState(Hive.box<PDFData>(pdfBoxName));
 
-  // Setter
-  bool setLoading(bool value) => _isLoading.value = value;
-
-  insertData() {
-    setLoading(true);
-    _list.value.addAll([
-      DummyData(
-        id: "1",
-        title: 'Title',
-        content: 'Content',
-      )
-    ]);
+  void _onTapItem(PDFData data) {
+    ExtendedNavigator.root.push(
+      Routes.pdfViewerPage,
+      arguments: PdfViewerPageArguments(
+        fileName: data.fileName,
+        path: data.path,
+      ),
+    );
   }
 
-  // Function
-  void _onTapItem() {
-    log('On Tap Item');
-  }
-
-  void _onTapDelete() {
-    log('On Tap Delete');
+  Future<void> _onTapDelete(int key) async {
+    await _pdfBox.value.delete(key);
   }
 
   Future<void> _onTapCreate() {
@@ -56,16 +48,11 @@ HomeState useHomeHook(BuildContext context) {
     );
   }
 
-  useEffect(() {
-    insertData();
-    setLoading(false);
-  }, [_list.value]);
-
   return HomeState(
     isLoading: _isLoading.value,
-    list: _list.value,
     onTapItem: _onTapItem,
     onTapDelete: _onTapDelete,
     onTapCreate: _onTapCreate,
+    pdfBox: _pdfBox.value,
   );
 }

@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:print_to_pdf/global/components/template_page.dart';
-
-class DummyData {
-  final String id;
-  final String title;
-  final String content;
-
-  DummyData({
-    this.id,
-    this.title,
-    this.content,
-  });
-}
+import 'package:print_to_pdf/global/model/pdf_data.dart';
+import 'package:print_to_pdf/page/home/widgets/components/item/pdf_item.dart';
 
 class HomeView extends StatelessWidget {
   final bool isLoading;
-  final List<DummyData> list;
-  final Function onTapItem;
-  final Function onTapDelete;
+  final Function(PDFData) onTapItem;
+  final Function(int) onTapDelete;
   final VoidCallback onTapCreate;
+  final Box<PDFData> pdfBox;
 
   const HomeView({
     Key key,
     this.isLoading = false,
-    this.list,
     this.onTapItem,
     this.onTapDelete,
     this.onTapCreate,
+    this.pdfBox,
   }) : super(key: key);
 
   @override
@@ -35,21 +27,16 @@ class HomeView extends StatelessWidget {
       title: 'Print to PDF',
       centerTitle: true,
       loading: isLoading,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(12),
-          child: ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: list.length,
-            separatorBuilder: (context, index) => SizedBox(height: 8),
-            itemBuilder: (context, index) => PDFItem(
-              data: list[index],
-              onTapItem: onTapItem,
-              onTapDelete: onTapDelete,
-            ),
-          ),
-        ),
+      body: ValueListenableBuilder(
+        valueListenable: pdfBox.listenable(),
+        builder: (context, Box<PDFData> value, _) {
+          List<int> keys = value.keys.cast<int>().toList();
+          return keys.isNotEmpty
+              ? _buildListView(keys)
+              : Center(
+                  child: Text('Data is empty'),
+                );
+        },
       ),
       floatingActionButton: !isLoading
           ? FloatingActionButton(
@@ -60,53 +47,25 @@ class HomeView extends StatelessWidget {
           : null,
     );
   }
-}
 
-class PDFItem extends StatelessWidget {
-  final DummyData data;
-  final Function onTapItem;
-  final Function onTapDelete;
-
-  const PDFItem({
-    Key key,
-    this.data,
-    this.onTapItem,
-    this.onTapDelete,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Card(
-        child: InkWell(
-          onTap: onTapItem,
-          child: Container(
-            color: Colors.transparent,
-            padding: EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 12,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(data.title),
-                      SizedBox(height: 4),
-                      Text(data.content),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: onTapDelete,
-                )
-              ],
-            ),
-          ),
-        ),
+  _buildListView(List<int> keys) {
+    return SingleChildScrollView(
+      child: ListView.separated(
+        padding: EdgeInsets.all(12),
+        itemCount: keys.length,
+        reverse: true,
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => SizedBox(height: 8),
+        itemBuilder: (context, index) {
+          final int key = keys[index];
+          final PDFData data = pdfBox.get(key);
+          return PDFItem(
+            itemKey: key,
+            data: data,
+            onTapItem: onTapItem,
+            onTapDelete: onTapDelete,
+          );
+        },
       ),
     );
   }

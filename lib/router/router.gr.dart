@@ -8,7 +8,6 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../page/form/page.dart';
 import '../page/home/page.dart';
@@ -59,18 +58,21 @@ class AppRouter extends RouterBase {
         orElse: () => FormPageArguments(),
       );
       return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) => FormPage(
-          key: args.key,
-          fileName: args.fileName,
-        ),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            FormPage(fileName: args.fileName),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeft,
       );
     },
     PdfViewerPage: (data) {
+      final args = data.getArgs<PdfViewerPageArguments>(
+        orElse: () => PdfViewerPageArguments(),
+      );
       return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            PdfViewerPage(),
+        pageBuilder: (context, animation, secondaryAnimation) => PdfViewerPage(
+          fileName: args.fileName,
+          path: args.path,
+        ),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeft,
       );
@@ -84,7 +86,13 @@ class AppRouter extends RouterBase {
 
 /// FormPage arguments holder class
 class FormPageArguments {
-  final Key key;
   final String fileName;
-  FormPageArguments({this.key, this.fileName});
+  FormPageArguments({this.fileName});
+}
+
+/// PdfViewerPage arguments holder class
+class PdfViewerPageArguments {
+  final String fileName;
+  final String path;
+  PdfViewerPageArguments({this.fileName, this.path});
 }

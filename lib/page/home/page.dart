@@ -10,7 +10,7 @@ class HomePage extends HookWidget {
     final state = useHomeHook(context);
     return HomeView(
       isLoading: state.isLoading,
-      list: state.list,
+      pdfBox: state.pdfBox,
       onTapItem: state.onTapItem,
       onTapDelete: state.onTapDelete,
       onTapCreate: state.onTapCreate,

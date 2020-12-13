@@ -16,7 +16,8 @@ VoidCallback useOnboardingHook(VoidCallback navigateToHome) {
 
   /// Execute function setTimer
   useEffect(() {
-    return _setTimer;
+    _setTimer();
+    return;
   });
 
   return _setTimer;

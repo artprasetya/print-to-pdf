@@ -14,9 +14,26 @@ class OnboardingPage extends HookWidget {
     useOnboardingHook(navigateToHome);
 
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text('Print To PDF'),
+      body: SafeArea(
+        child: Container(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 44,
+                  width: 44,
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(Colors.purple[300]),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text('Print To PDF'),
+              ],
+            ),
+          ),
         ),
       ),
     );

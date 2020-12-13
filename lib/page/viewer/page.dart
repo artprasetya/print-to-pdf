@@ -1,21 +1,18 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:print_to_pdf/page/viewer/view.dart';
 
-class PdfViewerPage extends StatefulWidget {
-  @override
-  _PdfViewerPageState createState() => _PdfViewerPageState();
-}
+class PdfViewerPage extends HookWidget {
+  final String fileName;
+  final String path;
 
-class _PdfViewerPageState extends State<PdfViewerPage> {
+  PdfViewerPage({this.fileName, this.path});
+
   @override
   Widget build(BuildContext context) {
     return PdfViewerView(
-      onBack: _onBack,
+      fileName: fileName,
+      path: path,
     );
-  }
-
-  void _onBack() {
-    ExtendedNavigator.root.pop();
   }
 }
