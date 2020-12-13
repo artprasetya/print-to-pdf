@@ -14,6 +14,7 @@ class HomePage extends HookWidget {
       onTapItem: state.onTapItem,
       onTapDelete: state.onTapDelete,
       onTapCreate: state.onTapCreate,
+      onTapPreference: state.onTapPreference,
     );
   }
 }

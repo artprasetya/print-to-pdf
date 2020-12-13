@@ -7,6 +7,8 @@ import 'package:print_to_pdf/global/styles/app_theme.dart';
 import 'package:print_to_pdf/router/router.gr.dart';
 
 const String pdfBoxName = 'pdf';
+const String preferenceBoxName = 'preference';
+const String preferenceKey = 'isDark';
 
 Future _initBox() async {
   await Hive.initFlutter();
@@ -16,20 +18,27 @@ Future _initBox() async {
 
 void main() async {
   await _initBox();
+  await Hive.openBox(preferenceBoxName);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Print to PDF',
-      debugShowCheckedModeBanner: false,
-      theme: appThemeData[AppTheme.Dark],
-      builder: ExtendedNavigator.builder<AppRouter>(
-        router: AppRouter(),
-        initialRoute: Routes.onboardingPage,
-      ),
+    return ValueListenableBuilder(
+      valueListenable: Hive.box(preferenceBoxName).listenable(),
+      builder: (context, box, _) {
+        final isDarkMode = box.get(preferenceKey, defaultValue: true);
+        return MaterialApp(
+          title: 'Print to PDF',
+          debugShowCheckedModeBanner: false,
+          theme: appThemeData[isDarkMode ? AppTheme.Dark : AppTheme.Light],
+          builder: ExtendedNavigator.builder<AppRouter>(
+            router: AppRouter(),
+            initialRoute: Routes.onboardingPage,
+          ),
+        );
+      },
     );
   }
 }

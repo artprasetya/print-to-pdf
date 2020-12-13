@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../page/form/page.dart';
 import '../page/home/page.dart';
 import '../page/onboarding/page.dart';
+import '../page/preference/page.dart';
 import '../page/viewer/page.dart';
 
 class Routes {
@@ -19,11 +20,13 @@ class Routes {
   static const String homePage = '/home-page';
   static const String formPage = '/form-page';
   static const String pdfViewerPage = '/pdf-viewer-page';
+  static const String preferencePage = '/preference-page';
   static const all = <String>{
     onboardingPage,
     homePage,
     formPage,
     pdfViewerPage,
+    preferencePage,
   };
 }
 
@@ -35,6 +38,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.homePage, page: HomePage),
     RouteDef(Routes.formPage, page: FormPage),
     RouteDef(Routes.pdfViewerPage, page: PdfViewerPage),
+    RouteDef(Routes.preferencePage, page: PreferencePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -73,6 +77,14 @@ class AppRouter extends RouterBase {
           fileName: args.fileName,
           path: args.path,
         ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+      );
+    },
+    PreferencePage: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            PreferencePage(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeft,
       );

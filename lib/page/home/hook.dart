@@ -12,6 +12,7 @@ class HomeState {
   final Function(PDFData) onTapItem;
   final Function(int) onTapDelete;
   final VoidCallback onTapCreate;
+  final VoidCallback onTapPreference;
   final Box<PDFData> pdfBox;
 
   HomeState({
@@ -19,6 +20,7 @@ class HomeState {
     this.onTapItem,
     this.onTapDelete,
     this.onTapCreate,
+    this.onTapPreference,
     this.pdfBox,
   });
 }
@@ -48,11 +50,16 @@ HomeState useHomeHook(BuildContext context) {
     );
   }
 
+  void _onTapPreference() {
+    ExtendedNavigator.root.push(Routes.preferencePage);
+  }
+
   return HomeState(
     isLoading: _isLoading.value,
     onTapItem: _onTapItem,
     onTapDelete: _onTapDelete,
     onTapCreate: _onTapCreate,
+    onTapPreference: _onTapPreference,
     pdfBox: _pdfBox.value,
   );
 }

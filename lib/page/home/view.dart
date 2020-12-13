@@ -10,6 +10,7 @@ class HomeView extends StatelessWidget {
   final Function(PDFData) onTapItem;
   final Function(int) onTapDelete;
   final VoidCallback onTapCreate;
+  final VoidCallback onTapPreference;
   final Box<PDFData> pdfBox;
 
   const HomeView({
@@ -18,6 +19,7 @@ class HomeView extends StatelessWidget {
     this.onTapItem,
     this.onTapDelete,
     this.onTapCreate,
+    this.onTapPreference,
     this.pdfBox,
   }) : super(key: key);
 
@@ -27,6 +29,12 @@ class HomeView extends StatelessWidget {
       title: 'Print to PDF',
       centerTitle: true,
       loading: isLoading,
+      actions: [
+        IconButton(
+          icon: Icon(Icons.settings),
+          onPressed: onTapPreference,
+        )
+      ],
       body: ValueListenableBuilder(
         valueListenable: pdfBox.listenable(),
         builder: (context, Box<PDFData> value, _) {
